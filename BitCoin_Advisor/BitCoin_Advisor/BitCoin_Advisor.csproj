@@ -39,8 +39,8 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Business\ArbitrageLoader.cs" />
-    <Compile Include="Helpers\ImageResourceExtension.cs" />
-    <Compile Include="Helpers\ImageSourceConverter.cs" />
+    <Compile Include="Converters\ImageResourceExtension.cs" />
+    <Compile Include="Converters\ImageSourceConverter.cs" />
     <Compile Include="Helpers\MessengingCenterAlert.cs" />
     <Compile Include="Helpers\ObservableObject.cs" />
     <Compile Include="Helpers\ObservableRangeCollection.cs" />

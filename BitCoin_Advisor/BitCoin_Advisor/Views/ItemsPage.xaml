@@ -3,13 +3,16 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="BitCoin_Advisor.Views.ItemsPage"
               Title="{Binding Title}"
+             xmlns:converter="clr-namespace:BitCoin_Advisor.Conveters"
              x:Name="BrowseItemsPage">
   <ContentPage.ToolbarItems>
   	<ToolbarItem Text="Add Item" Clicked="AddItem_Clicked" />
   </ContentPage.ToolbarItems>
-    <!--<ContentPage.Resources>
-        <local:ImageSourceConverter x:key="imageSourceConverter" />
-    </ContentPage.Resources>-->
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converter:ImageSourceConverter x:Key="imageSourceConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
   <ContentPage.Content>
     <StackLayout>
             <!--RefreshCommand="{Binding LoadItemsCommand}"-->
@@ -17,6 +20,7 @@
             <ListView x:Name="ItemsListView"
 				ItemsSource="{Binding Items}"
                 VerticalOptions="FillAndExpand"
+                      HorizontalOptions="FillAndExpand"
                 HasUnevenRows="true"
                 IsPullToRefreshEnabled="true"
                 IsRefreshing="{Binding IsBusy, Mode=OneWay}"
@@ -25,61 +29,40 @@
         <ListView.ItemTemplate>
           <DataTemplate>
             <ViewCell>
-              <StackLayout Padding="10" Orientation="Horizontal" VerticalOptions="Center">
-                <Grid>
+                <StackLayout Padding="5" Orientation="Horizontal" VerticalOptions="Center" HorizontalOptions="FillAndExpand" BackgroundColor="{DynamicResource BackGroundArbitrageColor}" >
+                <Grid HorizontalOptions="FillAndExpand">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="2*" />
+                        <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-                    <StackLayout Grid.Row="0" Grid.Column="0" Orientation="Vertical">
-                        <Label Text="{Binding From.Name}"
-                                LineBreakMode="NoWrap"
-                                Style="{DynamicResource ListItemTextStyle}"
-                                VerticalTextAlignment="Center"
-                                FontAttributes="Bold"
-                                FontSize="14"/>
-                                                <Label Text="{Binding From.Price.Last, StringFormat='{0:F2}'}"
-                                LineBreakMode="NoWrap"
-                                Style="{DynamicResource ListItemTextStyle}"
-                                VerticalTextAlignment="Center"
-                                FontSize="13"/>
+                    <StackLayout Grid.Row="0" Grid.Column="0" Orientation="Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
+                        <Image Source="{Binding From.Image, Converter={StaticResource imageSourceConverter}}"  HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"  Margin="0"   />
+                        <Label Text="{Binding From.Price.Last, StringFormat='{0:F2}'}" LineBreakMode="NoWrap" HorizontalOptions="CenterAndExpand" HorizontalTextAlignment="Center" Style="{DynamicResource ListItemTextStyle}" FontSize="13" TextColor="{DynamicResource ValueColor}" FontAttributes="Bold"/>
                     </StackLayout>
-                    <StackLayout Grid.Row="0" Grid.Column="1" Orientation="Vertical" VerticalOptions="FillAndExpand"  Margin="0,0,0,0" Spacing="0">
-
-                                        <StackLayout Orientation="Horizontal" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Spacing="0" Padding="0" Margin="0">
-                                            <Label LineBreakMode="NoWrap" Style="{DynamicResource ListItemTextStyle}" VerticalTextAlignment="Center" FontAttributes="Bold" FontSize="13" Text="Qty:"></Label>
-                            <Entry Text="{Binding Capital, Mode=TwoWay}" FontSize="14" WidthRequest="60"  />
-                            <Label LineBreakMode="NoWrap" Style="{DynamicResource ListItemTextStyle}" VerticalTextAlignment="Center" FontAttributes="Bold" FontSize="13" Text="USD"></Label>
-                                        </StackLayout>
-                                        <!--<StackLayout Orientation="Horizontal" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Spacing="0" Padding="0" Margin="0" >
-                            <Label LineBreakMode="NoWrap" Style="{DynamicResource ListItemTextStyle}" VerticalTextAlignment="Center" FontAttributes="Bold" FontSize="13" Text="USD\BRL:" WidthRequest="60" ></Label>
-                            <Label LineBreakMode="NoWrap" Style="{DynamicResource ListItemTextStyle}" VerticalTextAlignment="Center" FontSize="13" Text="{Binding Conversion}" WidthRequest="40" />
+                    <StackLayout Grid.Row="0" Grid.Column="1" Orientation="Vertical"  HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" >
+                        <StackLayout Orientation="Horizontal" HorizontalOptions="Center" >
+                            <Label LineBreakMode="NoWrap" Style="{DynamicResource ListItemTextStyle}" VerticalTextAlignment="Center" FontSize="13" Text="Qty:" TextColor="{DynamicResource LabelColor}"></Label>
+                            <Label LineBreakMode="NoWrap" Style="{DynamicResource ListItemTextStyle}" VerticalTextAlignment="Center" FontSize="13" Text="{Binding Capital}" TextColor="{DynamicResource ValueColor}" FontAttributes="Bold"></Label>
+                            <Label LineBreakMode="NoWrap" Style="{DynamicResource ListItemTextStyle}" VerticalTextAlignment="Center" FontSize="13" Text="USD" TextColor="{DynamicResource LabelColor}"></Label>
                         </StackLayout>
-                                        <StackLayout Orientation="Horizontal" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Spacing="0" Padding="0" Margin="0">
-                            <Label LineBreakMode="NoWrap" Style="{DynamicResource ListItemTextStyle}" VerticalTextAlignment="Center" FontAttributes="Bold" FontSize="13" Text="Net:"></Label>
-                            <Label LineBreakMode="NoWrap" Style="{DynamicResource ListItemTextStyle}" VerticalTextAlignment="Center" FontSize="13" Text="{Binding NetAmount, StringFormat='{0:F2}'}" />
-                        </StackLayout>-->
-                        
+                        <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                            <Label LineBreakMode="NoWrap" Style="{DynamicResource ListItemTextStyle}" VerticalTextAlignment="Center" FontSize="13" Text="USD\BRL:" WidthRequest="60" TextColor="{DynamicResource LabelColor}"></Label>
+                            <Label LineBreakMode="NoWrap" Style="{DynamicResource ListItemTextStyle}" VerticalTextAlignment="Center" FontAttributes="Bold" FontSize="13" Text="{Binding Conversion}" WidthRequest="40" TextColor="{DynamicResource ValueColor}" />
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                            <Label LineBreakMode="NoWrap" Style="{DynamicResource ListItemTextStyle}" VerticalTextAlignment="Center" FontSize="13" Text="Net:" TextColor="{DynamicResource LabelColor}"></Label>
+                            <Label LineBreakMode="NoWrap" Style="{DynamicResource ListItemTextStyle}" VerticalTextAlignment="Center" FontAttributes="Bold" FontSize="13" Text="{Binding NetAmount, StringFormat='{0:F2}'}" TextColor="{DynamicResource ValueColor}" />
+                        </StackLayout>                        
                     </StackLayout>
-                    <StackLayout Grid.Row="0" Grid.Column="3" Orientation="Vertical">
-                        <Label Text="{Binding To.Name}"
-                            LineBreakMode="NoWrap"
-                            Style="{DynamicResource ListItemTextStyle}"
-                            VerticalTextAlignment="Center"
-                            FontAttributes="Bold"
-                            FontSize="15"/>
-                                            <Label Text="{Binding To.Price.Last, StringFormat='{0:F2}'}"
-                            LineBreakMode="NoWrap"
-                            Style="{DynamicResource ListItemTextStyle}"
-                            VerticalTextAlignment="Center"
-                            FontSize="13"/>
+                        <StackLayout Grid.Row="0" Grid.Column="2" Orientation="Vertical" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+                        <Image Source="{Binding To.Image, Converter={StaticResource imageSourceConverter}}" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"  Margin="0"  />
+                        <Label Text="{Binding To.Price.Last, StringFormat='{0:F2}'}" LineBreakMode="NoWrap" Style="{DynamicResource ListItemTextStyle}" FontAttributes="Bold" HorizontalTextAlignment="Center" HorizontalOptions="CenterAndExpand" FontSize="13" XAlign="End" TextColor="#D7BA7D" />
                     </StackLayout>
                 </Grid>
-
             </StackLayout>
             </ViewCell>
           </DataTemplate>

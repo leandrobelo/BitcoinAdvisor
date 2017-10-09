@@ -25,9 +25,9 @@ namespace BitCoin_Advisor.Business
         {
             arbitrages.Clear();
 
-            var sourceMB = new Source() { Name = "MB", Image = @"Images\mb.png", TickerUrl = "https://www.mercadobitcoin.net/api/BTC/ticker/", Fee = 0.97m };
-            var sourceBistamp = new Source() { Name = "BitStamp", Image = @"Images\bistamp.png", TickerUrl = "https://www.bitstamp.net/api/ticker/", Fee = 0.99m };
-            var sourceFoxBit = new Source() { Name = "FoxBit", Image = @"Images\foxbit.png", TickerUrl = "https://api.blinktrade.com/api/v1/BRL/ticker", Fee = 0.98m };
+            var sourceMB = new Source() { Name = "MB", Image = @"BitCoin_Advisor.Images.mb.png", TickerUrl = "https://www.mercadobitcoin.net/api/BTC/ticker/", Fee = 0.97m };
+            var sourceBistamp = new Source() { Name = "BitStamp", Image = @"BitCoin_Advisor.Images.bitstamp.png", TickerUrl = "https://www.bitstamp.net/api/ticker/", Fee = 0.99m };
+            var sourceFoxBit = new Source() { Name = "FoxBit", Image = @"BitCoin_Advisor.Images.foxbit.png", TickerUrl = "https://api.blinktrade.com/api/v1/BRL/ticker", Fee = 0.98m };
 
             sources.Add(sourceMB);
             sources.Add(sourceBistamp);

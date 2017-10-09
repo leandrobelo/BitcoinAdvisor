@@ -10,6 +10,11 @@
             <Color x:Key="MediumGrayTextColor">#0c0b0b</Color>
             <Color x:Key="LightTextColor">#999999</Color>
 
+            //Exclusive
+            <Color x:Key="BackGroundArbitrageColor">#2D2D30</Color>
+            <Color x:Key="LabelColor">#92caf4</Color>
+            <Color x:Key="ValueColor">#D7BA7D</Color>
+
             <Style TargetType="NavigationPage">
                 <Setter Property="BarBackgroundColor" Value="{StaticResource Primary}" />
                 <Setter Property="BarTextColor" Value="White" />

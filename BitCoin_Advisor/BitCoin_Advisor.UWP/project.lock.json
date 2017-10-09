@@ -22263,12 +22263,12 @@
   },
   "project": {
     "restore": {
-      "projectUniqueName": "F:\\Projetos\\Visual Studio 2017\\BitCoin_Advisor\\BitCoin_Advisor\\BitCoin_Advisor.UWP\\BitCoin_Advisor.UWP.csproj",
+      "projectUniqueName": "F:\\Projetos\\Visual Studio 2017\\BitcoinAdvisor\\BitCoin_Advisor\\BitCoin_Advisor.UWP\\BitCoin_Advisor.UWP.csproj",
       "projectName": "BitCoin_Advisor.UWP",
-      "projectPath": "F:\\Projetos\\Visual Studio 2017\\BitCoin_Advisor\\BitCoin_Advisor\\BitCoin_Advisor.UWP\\BitCoin_Advisor.UWP.csproj",
-      "projectJsonPath": "F:\\Projetos\\Visual Studio 2017\\BitCoin_Advisor\\BitCoin_Advisor\\BitCoin_Advisor.UWP\\project.json",
+      "projectPath": "F:\\Projetos\\Visual Studio 2017\\BitcoinAdvisor\\BitCoin_Advisor\\BitCoin_Advisor.UWP\\BitCoin_Advisor.UWP.csproj",
+      "projectJsonPath": "F:\\Projetos\\Visual Studio 2017\\BitcoinAdvisor\\BitCoin_Advisor\\BitCoin_Advisor.UWP\\project.json",
       "packagesPath": "C:\\Users\\Andre\\.nuget\\packages\\",
-      "outputPath": "F:\\Projetos\\Visual Studio 2017\\BitCoin_Advisor\\BitCoin_Advisor\\BitCoin_Advisor.UWP\\obj\\",
+      "outputPath": "F:\\Projetos\\Visual Studio 2017\\BitcoinAdvisor\\BitCoin_Advisor\\BitCoin_Advisor.UWP\\obj\\",
       "projectStyle": "ProjectJson",
       "configFilePaths": [
         "C:\\Users\\Andre\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -22281,8 +22281,8 @@
       "frameworks": {
         "uap10.0.10586": {
           "projectReferences": {
-            "F:\\Projetos\\Visual Studio 2017\\BitCoin_Advisor\\BitCoin_Advisor\\BitCoin_Advisor\\BitCoin_Advisor.csproj": {
-              "projectPath": "F:\\Projetos\\Visual Studio 2017\\BitCoin_Advisor\\BitCoin_Advisor\\BitCoin_Advisor\\BitCoin_Advisor.csproj"
+            "F:\\Projetos\\Visual Studio 2017\\BitcoinAdvisor\\BitCoin_Advisor\\BitCoin_Advisor\\BitCoin_Advisor.csproj": {
+              "projectPath": "F:\\Projetos\\Visual Studio 2017\\BitcoinAdvisor\\BitCoin_Advisor\\BitCoin_Advisor\\BitCoin_Advisor.csproj"
             }
           }
         }
