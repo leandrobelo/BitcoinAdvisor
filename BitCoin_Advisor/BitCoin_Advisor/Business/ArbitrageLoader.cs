@@ -25,55 +25,39 @@ namespace BitCoin_Advisor.Business
         {
             arbitrages.Clear();
 
-            var sourceMB = new Source() { Name = "MB", Image = @"BitCoin_Advisor.Images.mb.png", TickerUrl = "https://www.mercadobitcoin.net/api/BTC/ticker/", Fee = 0.97m };
-            var sourceBistamp = new Source() { Name = "BitStamp", Image = @"BitCoin_Advisor.Images.bitstamp.png", TickerUrl = "https://www.bitstamp.net/api/ticker/", Fee = 0.99m };
-            var sourceFoxBit = new Source() { Name = "FoxBit", Image = @"BitCoin_Advisor.Images.foxbit.png", TickerUrl = "https://api.blinktrade.com/api/v1/BRL/ticker", Fee = 0.98m };
+            var sourceMB = new Source() { Name = "MB", Image = @"BitCoin_Advisor.Images.mb.png", TickerUrl = "https://www.mercadobitcoin.net/api/BTC/ticker/", Fee = 0.97m, Currency = "BRL" };
+            var sourceBistamp = new Source() { Name = "BitStamp", Image = @"BitCoin_Advisor.Images.bitstamp.png", TickerUrl = "https://www.bitstamp.net/api/ticker/", Fee = 0.99m, Currency = "USD" };
+            var sourceFoxBit = new Source() { Name = "FoxBit", Image = @"BitCoin_Advisor.Images.foxbit.png", TickerUrl = "https://api.blinktrade.com/api/v1/BRL/ticker", Fee = 0.98m, Currency = "BRL" };
+            var sourceCoinfloor = new Source() { Name = "CoinFloor", Image = @"BitCoin_Advisor.Images.coinfloor.png", TickerUrl = "https://webapi.coinfloor.co.uk:8090/bist/XBT/GBP/ticker/", Fee = 0.99m, Currency = "GBP" };
 
             sources.Add(sourceMB);
             sources.Add(sourceBistamp);
             sources.Add(sourceFoxBit);
+            sources.Add(sourceCoinfloor);
 
-            foreach (var source in sources)
+            var tasks = sources.Select(async item =>
             {
-                await GetTicker(source);
-            }
+                await GetTicker(item);
+            });
+            await Task.WhenAll(tasks);
 
-            decimal usdBrl = await GetUsdBrl();
+            //decimal usdBrl = await GetUsdBrl();
 
-            arbitrages.Add(new Arbitrage() { From = sourceBistamp, To = sourceFoxBit, Conversion = usdBrl, Capital = 1000 });
-            arbitrages.Add(new Arbitrage() { From = sourceBistamp, To = sourceMB, Conversion = usdBrl, Capital = 1000 });
+            BLExchangeRate bLExchangeRate = new BLExchangeRate();
+            
+
+
+            arbitrages.Add(new Arbitrage(sourceBistamp, sourceFoxBit, 1000, await bLExchangeRate.GetExchangeRate(sourceBistamp.Currency, sourceFoxBit.Currency)));
+            arbitrages.Add(new Arbitrage(sourceBistamp, sourceMB, 1000, await bLExchangeRate.GetExchangeRate(sourceBistamp.Currency, sourceMB.Currency)));
+            arbitrages.Add(new Arbitrage(sourceCoinfloor, sourceMB, 1000, await bLExchangeRate.GetExchangeRate(sourceCoinfloor.Currency, sourceMB.Currency)));
+            arbitrages.Add(new Arbitrage(sourceCoinfloor, sourceBistamp, 1000, await bLExchangeRate.GetExchangeRate(sourceCoinfloor.Currency, sourceBistamp.Currency)));
+            arbitrages.Add(new Arbitrage(sourceCoinfloor, sourceFoxBit, 1000, await bLExchangeRate.GetExchangeRate(sourceCoinfloor.Currency, sourceFoxBit.Currency)));
+            arbitrages.Add(new Arbitrage(sourceMB, sourceCoinfloor, 1000, await bLExchangeRate.GetExchangeRate(sourceMB.Currency, sourceCoinfloor.Currency)));
+            arbitrages.Add(new Arbitrage(sourceFoxBit, sourceCoinfloor, 1000, await bLExchangeRate.GetExchangeRate(sourceFoxBit.Currency, sourceCoinfloor.Currency)));
 
             return arbitrages;
         }
 
-        private async Task<decimal> GetUsdBrl()
-        {
-            string exchangeUrl = "https://www.ebanx.com/business/en/dashboard/exchange";
-
-            var byteUrl = await ParseExchange(exchangeUrl);
-            string regEx = "<h3>USD 1 = BRL ([0-9]*\\.*[0-9]*)</h3>";
-            Regex regex = new Regex(regEx);
-            string result = System.Text.Encoding.UTF8.GetString(byteUrl, 0, byteUrl.Count() - 1);
-            var matched = regex.Match(result);
-            decimal UsdBrl = Convert.ToDecimal(matched.Groups[1].ToString(), new CultureInfo("en-US"));
-
-            decimal plusIof = System.Math.Round(UsdBrl * 1.0038m, 2, MidpointRounding.AwayFromZero);
-
-            return plusIof;
-        }
-
-        public async Task<byte[]> ParseExchange(string uri)
-        {
-            try
-            {
-                var httpClient = new HttpClient(); // Error CS0246: The type or namespace name `HttpClient' could not be found. Are you missing an assembly reference? (CS0246)
-                return await httpClient.GetByteArrayAsync(uri);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-        }
 
         public async Task GetTicker(Source source)
         {

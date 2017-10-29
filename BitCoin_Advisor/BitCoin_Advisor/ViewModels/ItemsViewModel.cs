@@ -13,44 +13,62 @@ namespace BitCoin_Advisor.ViewModels
     {
         public ObservableRangeCollection<Arbitrage> Items { get; set; }
 
+        public Command LoadItemsCommand
+        {
+            get
+            {
+                return new Command(async () =>
+                {
+                    //IsRefreshing = true;
+
+                    await ExecuteLoadItemsCommand();
+
+                    //IsRefreshing = false;
+                });
+            }
+        }
+
+        BitCoin_Advisor.Business.ArbitrageLoader arbitrageLoader = new BitCoin_Advisor.Business.ArbitrageLoader();
+
         public ItemsViewModel()
         {
             Items = new ObservableRangeCollection<Arbitrage>();
 
-            BitCoin_Advisor.Business.ArbitrageLoader arbitrageLoader = new BitCoin_Advisor.Business.ArbitrageLoader();
+            ExecuteLoadItemsCommand();
+        }
 
-            Device.BeginInvokeOnMainThread(async () =>
-            {
-                Items.AddRange(await arbitrageLoader.LoadSources());
-            });
 
-            Device.StartTimer(TimeSpan.FromSeconds(120), () =>
+        async Task ExecuteLoadItemsCommand()
+        {
+            if (IsBusy)
+                return;
+
+            IsBusy = true;
+
+            try
             {
+                Items.Clear();
+
                 Device.BeginInvokeOnMainThread(async () =>
                 {
-                    try
-                    {
-
-                        Items.Clear();
-                        Items.AddRange(await arbitrageLoader.LoadSources());
-                    }
-                    catch (Exception ex)
-                    {
-                        Debug.WriteLine(ex);
-                        MessagingCenter.Send(new MessagingCenterAlert
-                        {
-                            Title = "Error loading data.",
-                            Message = ex.Message,
-                            Cancel = "OK"
-                        }, "message");
-                    }
-                    finally
-                    {
-                    }
+                    Items.AddRange(await arbitrageLoader.LoadSources());
                 });
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+                MessagingCenter.Send(new MessagingCenterAlert
+                {
+                    Title = "Error",
+                    Message = "Unable to load items.",
+                    Cancel = "OK"
+                }, "message");
+            }
+            finally
+            {
+                IsBusy = false;
+            }
 
-                return true;
-            });
         }
     }
 }

@@ -35,12 +35,12 @@ namespace BitCoin_Advisor.Views
             await Navigation.PushAsync(new NewItemPage());
         }
 
-        protected override void OnAppearing()
-        {
-            base.OnAppearing();
+        //protected override void OnAppearing()
+        //{
+        //    base.OnAppearing();
 
-            //if (viewModel.Items.Count == 0 && viewModel.LoadItemsCommand != null)
-                //viewModel.LoadItemsCommand.Execute(null);
-        }
+        //    //if (viewModel.Items.Count == 0 && viewModel.LoadItemsCommand != null)
+        //    //    viewModel.LoadItemsCommand.Execute(null);
+        //}
     }
 }

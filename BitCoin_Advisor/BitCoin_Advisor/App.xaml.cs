@@ -20,6 +20,8 @@ namespace BitCoin_Advisor
         {
             Current.MainPage = new TabbedPage
             {
+                BarBackgroundColor = Color.FromHex("#00548C"),
+                BackgroundColor = Color.FromHex("#3F3F46"),
                 Children =
                 {
                     new NavigationPage(new ItemsPage())

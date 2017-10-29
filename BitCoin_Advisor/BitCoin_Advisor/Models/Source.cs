@@ -43,5 +43,12 @@ namespace BitCoin_Advisor
             get { return fee; }
             set { SetProperty(ref fee, value); }
         }
+
+        string currency = "";
+        public string Currency
+        {
+            get { return currency; }
+            set { SetProperty(ref currency, value); }
+        }
     }
 }
