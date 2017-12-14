@@ -25,35 +25,43 @@ namespace BitCoin_Advisor.Business
         {
             arbitrages.Clear();
 
-            var sourceMB = new Source() { Name = "MB", Image = @"BitCoin_Advisor.Images.mb.png", TickerUrl = "https://www.mercadobitcoin.net/api/BTC/ticker/", Fee = 0.97m, Currency = "BRL" };
+            var sourceMB = new Source() { Name = "MB", Image = @"BitCoin_Advisor.Images.mb.png", TickerUrl = "https://www.mercadobitcoin.net/api/BTC/ticker/", Fee = 0.99m, Currency = "BRL" };
+            var sourceBitCoinTrade = new Source() { Name = "BitCoinTrade", Image = @"BitCoin_Advisor.Images.bitcointrade.jpg", TickerUrl = "https://api.bitcointrade.com.br/v1/public/BTC/ticker", Fee = 0.99m, Currency = "BRL" };            
             var sourceBistamp = new Source() { Name = "BitStamp", Image = @"BitCoin_Advisor.Images.bitstamp.png", TickerUrl = "https://www.bitstamp.net/api/ticker/", Fee = 0.99m, Currency = "USD" };
-            var sourceFoxBit = new Source() { Name = "FoxBit", Image = @"BitCoin_Advisor.Images.foxbit.png", TickerUrl = "https://api.blinktrade.com/api/v1/BRL/ticker", Fee = 0.98m, Currency = "BRL" };
+            var sourceFoxBit = new Source() { Name = "FoxBit", Image = @"BitCoin_Advisor.Images.foxbit.png", TickerUrl = "https://api.blinktrade.com/api/v1/BRL/ticker", Fee = 0.995m, Currency = "BRL" };
             var sourceCoinfloor = new Source() { Name = "CoinFloor", Image = @"BitCoin_Advisor.Images.coinfloor.png", TickerUrl = "https://webapi.coinfloor.co.uk:8090/bist/XBT/GBP/ticker/", Fee = 0.99m, Currency = "GBP" };
 
-            sources.Add(sourceMB);
+//            sources.Add(sourceCoinfloor);
             sources.Add(sourceBistamp);
+            sources.Add(sourceMB);
+            sources.Add(sourceBitCoinTrade);
             sources.Add(sourceFoxBit);
-            sources.Add(sourceCoinfloor);
+            
 
             var tasks = sources.Select(async item =>
             {
                 await GetTicker(item);
             });
             await Task.WhenAll(tasks);
-
-            //decimal usdBrl = await GetUsdBrl();
-
+            
             BLExchangeRate bLExchangeRate = new BLExchangeRate();
             
 
+            foreach( var s in sources)
+            {
+                foreach( var s2 in sources)
+                {
+                    if (s != s2)
+                    {
+                        arbitrages.Add(new Arbitrage(s, s2));
+                    }
+                }
+            }
 
-            arbitrages.Add(new Arbitrage(sourceBistamp, sourceFoxBit, 1000, await bLExchangeRate.GetExchangeRate(sourceBistamp.Currency, sourceFoxBit.Currency)));
-            arbitrages.Add(new Arbitrage(sourceBistamp, sourceMB, 1000, await bLExchangeRate.GetExchangeRate(sourceBistamp.Currency, sourceMB.Currency)));
-            arbitrages.Add(new Arbitrage(sourceCoinfloor, sourceMB, 1000, await bLExchangeRate.GetExchangeRate(sourceCoinfloor.Currency, sourceMB.Currency)));
-            arbitrages.Add(new Arbitrage(sourceCoinfloor, sourceBistamp, 1000, await bLExchangeRate.GetExchangeRate(sourceCoinfloor.Currency, sourceBistamp.Currency)));
-            arbitrages.Add(new Arbitrage(sourceCoinfloor, sourceFoxBit, 1000, await bLExchangeRate.GetExchangeRate(sourceCoinfloor.Currency, sourceFoxBit.Currency)));
-            arbitrages.Add(new Arbitrage(sourceMB, sourceCoinfloor, 1000, await bLExchangeRate.GetExchangeRate(sourceMB.Currency, sourceCoinfloor.Currency)));
-            arbitrages.Add(new Arbitrage(sourceFoxBit, sourceCoinfloor, 1000, await bLExchangeRate.GetExchangeRate(sourceFoxBit.Currency, sourceCoinfloor.Currency)));
+            foreach(var arbitrage in arbitrages)
+            {
+                arbitrage.Conversion = await bLExchangeRate.GetExchangeRate(arbitrage.From.Currency, arbitrage.To.Currency);
+            }
 
             return arbitrages;
         }
@@ -63,13 +71,21 @@ namespace BitCoin_Advisor.Business
         {
             try
             {
-                var client = new System.Net.Http.HttpClient();
+                var client = new HttpClient();
                 client.DefaultRequestHeaders.Add("Accept", "application/json");
+                client.Timeout = TimeSpan.FromMinutes(300);
+                
                 var address = String.Format(source.TickerUrl);
                 var response = await client.GetAsync(address);
+                
+
                 var resultJson = response.Content.ReadAsStringAsync().Result;
 
-                if (!resultJson.Contains("ticker"))
+                if (resultJson.Contains("\"data\""))
+                {
+                    resultJson = resultJson.Replace("\"data\"", "ticker");
+                }
+                else if (!resultJson.Contains("ticker"))
                 {
                     resultJson = @"{""ticker"": " + resultJson + "}";
                 }
@@ -81,6 +97,7 @@ namespace BitCoin_Advisor.Business
             catch (Exception ex)
             {
                 throw ex;
+                //return new Task() { return new Tickers()};
             }
         }
     }

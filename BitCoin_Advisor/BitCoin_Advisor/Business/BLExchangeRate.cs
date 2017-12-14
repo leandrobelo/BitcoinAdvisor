@@ -23,11 +23,19 @@ namespace BitCoin_Advisor.Business
                 Regex regex = new Regex(regEx);
                 string result = System.Text.Encoding.UTF8.GetString(byteUrl, 0, byteUrl.Count() - 1);
                 var matched = regex.Match(result);
-                decimal UsdBrl = Convert.ToDecimal(matched.Groups[1].ToString(), new CultureInfo("en-US"));
 
-                decimal plusIof = System.Math.Round(UsdBrl * 1.0038m, 2, MidpointRounding.AwayFromZero);
+                if (matched.Groups.Count > 1)
+                {
+                    decimal UsdBrl = Convert.ToDecimal(matched.Groups[1].ToString(), new CultureInfo("en-US"));
 
-                return plusIof;
+                    decimal rounded = System.Math.Round(UsdBrl, 2, MidpointRounding.AwayFromZero);
+
+                    return rounded;
+                }
+                else
+                {
+                    return 1;
+                }
             }
             catch (Exception ex)
             {

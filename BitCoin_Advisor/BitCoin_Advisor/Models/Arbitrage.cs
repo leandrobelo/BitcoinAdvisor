@@ -9,14 +9,12 @@ namespace BitCoin_Advisor.Models
 {
     public class Arbitrage : BaseDataObject
     {
-        public Arbitrage(Source from, Source to, decimal capital, decimal conversion)
+        public Arbitrage(Source from, Source to)
         {
             this.From = from;
             this.To = to;
-            this.Capital = capital;
 
             this.ExchangeRateLabel = string.Format("{0}/{1}:", this.From.Currency, this.To.Currency);
-            this.Conversion = conversion;
         }
 
 
@@ -41,37 +39,29 @@ namespace BitCoin_Advisor.Models
             set { SetProperty(ref conversion, value); }
         }
 
-        decimal netAmount = 0;
-        public decimal NetAmount
+        decimal profit = 0;
+        public decimal Profit
         {
             get
             {
                 CalculateNet();
-                return netAmount;
+                return profit;
             }
             set
             {
-                SetProperty(ref netAmount, value);
+                SetProperty(ref profit, value);
             }
         }
 
         public void CalculateNet()
         {
-            netAmount = (((Capital * from.Fee) / From.Price.Last) * to.Price.Last) * to.Fee - capital * conversion;
+             decimal currentBitcoin = (from.Price.Last * from.Fee) / from.Price.Last;
+            decimal netTo = (currentBitcoin * to.Price.Last * to.Fee) / conversion;
+
+
+            profit = (netTo - from.Price.Last) / from.Price.Last;
         }
 
-        decimal capital = 0;
-        public decimal Capital
-        {
-            get { return capital; }
-            set
-            {
-                SetProperty(ref capital, value);
-
-                CalculateNet();
-                SetProperty(ref netAmount, value);
-            }
-        }
 
         string exchangeRateLabel = "";
         public string ExchangeRateLabel
