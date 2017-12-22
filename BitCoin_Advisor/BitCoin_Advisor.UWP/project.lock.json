@@ -22259,20 +22259,25 @@
     "UAP,Version=v10.0.10586": []
   },
   "packageFolders": {
-    "C:\\Users\\Andre\\.nuget\\packages\\": {}
+    "C:\\Users\\Leandro\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackagesFallback\\": {}
   },
   "project": {
     "restore": {
-      "projectUniqueName": "F:\\Projetos\\Visual Studio 2017\\BitcoinAdvisor\\BitCoin_Advisor\\BitCoin_Advisor.UWP\\BitCoin_Advisor.UWP.csproj",
+      "projectUniqueName": "C:\\Users\\Leandro\\Projects\\BitcoinAdvisor\\BitCoin_Advisor\\BitCoin_Advisor.UWP\\BitCoin_Advisor.UWP.csproj",
       "projectName": "BitCoin_Advisor.UWP",
-      "projectPath": "F:\\Projetos\\Visual Studio 2017\\BitcoinAdvisor\\BitCoin_Advisor\\BitCoin_Advisor.UWP\\BitCoin_Advisor.UWP.csproj",
-      "projectJsonPath": "F:\\Projetos\\Visual Studio 2017\\BitcoinAdvisor\\BitCoin_Advisor\\BitCoin_Advisor.UWP\\project.json",
-      "packagesPath": "C:\\Users\\Andre\\.nuget\\packages\\",
-      "outputPath": "F:\\Projetos\\Visual Studio 2017\\BitcoinAdvisor\\BitCoin_Advisor\\BitCoin_Advisor.UWP\\obj\\",
+      "projectPath": "C:\\Users\\Leandro\\Projects\\BitcoinAdvisor\\BitCoin_Advisor\\BitCoin_Advisor.UWP\\BitCoin_Advisor.UWP.csproj",
+      "projectJsonPath": "C:\\Users\\Leandro\\Projects\\BitcoinAdvisor\\BitCoin_Advisor\\BitCoin_Advisor.UWP\\project.json",
+      "packagesPath": "C:\\Users\\Leandro\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Leandro\\Projects\\BitcoinAdvisor\\BitCoin_Advisor\\BitCoin_Advisor.UWP\\obj\\",
       "projectStyle": "ProjectJson",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackagesFallback\\"
+      ],
       "configFilePaths": [
-        "C:\\Users\\Andre\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "C:\\Users\\Leandro\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.Fallback.config"
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
@@ -22281,16 +22286,16 @@
       "frameworks": {
         "uap10.0.10586": {
           "projectReferences": {
-            "F:\\Projetos\\Visual Studio 2017\\BitcoinAdvisor\\BitCoin_Advisor\\BitCoin_Advisor\\BitCoin_Advisor.csproj": {
-              "projectPath": "F:\\Projetos\\Visual Studio 2017\\BitcoinAdvisor\\BitCoin_Advisor\\BitCoin_Advisor\\BitCoin_Advisor.csproj"
+            "C:\\Users\\Leandro\\Projects\\BitcoinAdvisor\\BitCoin_Advisor\\BitCoin_Advisor\\BitCoin_Advisor.csproj": {
+              "projectPath": "C:\\Users\\Leandro\\Projects\\BitcoinAdvisor\\BitCoin_Advisor\\BitCoin_Advisor\\BitCoin_Advisor.csproj"
             }
           }
         }
       }
     },
     "dependencies": {
-      "Microsoft.NETCore.UniversalWindowsPlatform": "5.2.2",
-      "Xamarin.Forms": "2.3.4.224"
+      "Microsoft.NETCore.UniversalWindowsPlatform": "[5.2.2, )",
+      "Xamarin.Forms": "[2.3.4.224, )"
     },
     "frameworks": {
       "uap10.0.10586": {}
