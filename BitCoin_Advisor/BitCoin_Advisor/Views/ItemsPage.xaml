@@ -40,8 +40,8 @@
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
                     <StackLayout Grid.Row="0" Grid.Column="0" Orientation="Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Padding="0" Margin="0" >
-                        <Image Source="{Binding From.Image, Converter={StaticResource imageSourceConverter}}"  HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"  Margin="0"  />
-                        <Label Text="{Binding From.Price.Last, StringFormat='{0:F2}'}" LineBreakMode="NoWrap" HorizontalTextAlignment="Center" Style="{DynamicResource ListItemTextStyle}" FontSize="13" TextColor="{DynamicResource ValueColor}" FontAttributes="Bold" />
+                        <Image Source="{Binding From.Image, Converter={StaticResource imageSourceConverter}}"  HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"  Margin="0"/>
+                        <Label Text="{Binding From.Price.Last, StringFormat='{0:F2}'}" LineBreakMode="NoWrap" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" VerticalOptions="Center" HorizontalOptions="Center" Style="{DynamicResource ListItemTextStyle}" FontSize="13" HeightRequest="15" Margin="0" TextColor="{DynamicResource ValueColor}" FontAttributes="Bold" />
                     </StackLayout>
                     <StackLayout Grid.Row="0" Grid.Column="1" Orientation="Vertical"  HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Padding="0" Margin="0">
                         <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Padding="0" Margin="0">

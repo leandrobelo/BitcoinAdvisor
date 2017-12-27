@@ -26,7 +26,7 @@ namespace BitCoin_Advisor.Business
             arbitrages.Clear();
 
             var sourceMB = new Source() { Name = "MB", Image = @"BitCoin_Advisor.Images.mb.png", TickerUrl = "https://www.mercadobitcoin.net/api/BTC/ticker/", Fee = 0.99m, Currency = "BRL" };
-            var sourceBitCoinTrade = new Source() { Name = "BitCoinTrade", Image = @"BitCoin_Advisor.Images.bitcointrade.jpg", TickerUrl = "https://api.bitcointrade.com.br/v1/public/BTC/ticker", Fee = 0.99m, Currency = "BRL" };            
+            var sourceBitCoinTrade = new Source() { Name = "BitCoinTrade", Image = @"BitCoin_Advisor.Images.bitcointrade.png", TickerUrl = "https://api.bitcointrade.com.br/v1/public/BTC/ticker", Fee = 0.99m, Currency = "BRL" };            
             var sourceBistamp = new Source() { Name = "BitStamp", Image = @"BitCoin_Advisor.Images.bitstamp.png", TickerUrl = "https://www.bitstamp.net/api/ticker/", Fee = 0.99m, Currency = "USD" };
             var sourceFoxBit = new Source() { Name = "FoxBit", Image = @"BitCoin_Advisor.Images.foxbit.png", TickerUrl = "https://api.blinktrade.com/api/v1/BRL/ticker", Fee = 0.995m, Currency = "BRL" };
             var sourceCoinfloor = new Source() { Name = "CoinFloor", Image = @"BitCoin_Advisor.Images.coinfloor.png", TickerUrl = "https://webapi.coinfloor.co.uk:8090/bist/XBT/GBP/ticker/", Fee = 0.99m, Currency = "GBP" };
