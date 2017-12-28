@@ -7,27 +7,13 @@ using System.Threading.Tasks;
 
 namespace BitCoin_Advisor
 {
-    public class Source : BaseDataObject
+    public class Exchange : BaseDataObject
     {
         string name = string.Empty;
         public string Name
         {
             get { return name; }
             set { SetProperty(ref name, value); }
-        }
-
-        string tickerurl = string.Empty;
-        public string TickerUrl
-        {
-            get { return tickerurl; }
-            set { SetProperty(ref tickerurl, value); }
-        }
-
-        Ticker price = null;
-        public Ticker Price
-        {
-            get { return price; }
-            set { SetProperty(ref price, value); }
         }
 
         string image = string.Empty;
