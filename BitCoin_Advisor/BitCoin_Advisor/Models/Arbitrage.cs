@@ -9,24 +9,23 @@ namespace BitCoin_Advisor.Models
 {
     public class Arbitrage : BaseDataObject
     {
-        public Arbitrage(Source from, Source to)
+        public Arbitrage(ExchangeTicker from, ExchangeTicker to)
         {
             this.From = from;
             this.To = to;
 
-            this.ExchangeRateLabel = string.Format("{0}/{1}:", this.From.Currency, this.To.Currency);
+            this.ExchangeRateLabel = string.Format("{0}/{1}:", this.From.Exchange.Currency, this.To.Exchange.Currency);
         }
 
-
-        Source from = null;
-        public Source From
+        ExchangeTicker from = null;
+        public ExchangeTicker From
         {
             get { return from; }
             set { SetProperty(ref from, value); }
         }
 
-        Source to = null;
-        public Source To
+        ExchangeTicker to = null;
+        public ExchangeTicker To
         {
             get { return to; }
             set { SetProperty(ref to, value); }
@@ -55,8 +54,8 @@ namespace BitCoin_Advisor.Models
 
         public void CalculateNet()
         {
-             decimal currentBitcoin = (from.Price.Last * from.Fee) / from.Price.Last;
-            decimal netTo = (currentBitcoin * to.Price.Last * to.Fee) / conversion;
+            decimal currentBitcoin = (from.Price.Last * from.Exchange.Fee) / from.Price.Last;
+            decimal netTo = (currentBitcoin * to.Price.Last * to.Exchange.Fee) / conversion;
 
 
             profit = (netTo - from.Price.Last) / from.Price.Last;
@@ -71,6 +70,6 @@ namespace BitCoin_Advisor.Models
             {
                 SetProperty(ref exchangeRateLabel, value);
             }
-        }        
+        }
     }
 }
