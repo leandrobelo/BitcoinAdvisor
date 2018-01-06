@@ -91,9 +91,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ArbitrageBinder.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ArbitrageService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
