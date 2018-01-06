@@ -6,6 +6,7 @@ using BitCoin_Advisor.Models;
 using BitCoin_Advisor.Views;
 using System.Linq;
 using Xamarin.Forms;
+using BitCoin_Advisor.Business;
 
 namespace BitCoin_Advisor.ViewModels
 {
@@ -28,11 +29,9 @@ namespace BitCoin_Advisor.ViewModels
             }
         }
 
-        BitCoin_Advisor.Business.ArbitrageLoader arbitrageLoader = new BitCoin_Advisor.Business.ArbitrageLoader();
-
         public ItemsViewModel()
         {
-            Items = new ObservableRangeCollection<Arbitrage>();
+            Items = ArbitrageLoader.Arbitrages;
 
             ExecuteLoadItemsCommand();
         }
@@ -47,12 +46,7 @@ namespace BitCoin_Advisor.ViewModels
 
             try
             {
-                Items.Clear();
-
-                Device.BeginInvokeOnMainThread(async () =>
-                {
-                    Items.AddRange(await arbitrageLoader.LoadSources());
-                });
+                await ArbitrageLoader.LoadSources();
             }
             catch (Exception ex)
             {
