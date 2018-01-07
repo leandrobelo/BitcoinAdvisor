@@ -30,17 +30,9 @@ namespace BitCoin_Advisor.Views
             ItemsListView.SelectedItem = null;
         }
 
-        async void AddItem_Clicked(object sender, EventArgs e)
+        async void Settings_Clicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new NewItemPage());
+            await Navigation.PushAsync(new SettingsPage());
         }
-
-        //protected override void OnAppearing()
-        //{
-        //    base.OnAppearing();
-
-        //    //if (viewModel.Items.Count == 0 && viewModel.LoadItemsCommand != null)
-        //    //    viewModel.LoadItemsCommand.Execute(null);
-        //}
     }
 }

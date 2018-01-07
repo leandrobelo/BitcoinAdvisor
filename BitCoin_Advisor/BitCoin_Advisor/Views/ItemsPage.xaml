@@ -6,7 +6,7 @@
              xmlns:converter="clr-namespace:BitCoin_Advisor.Conveters"
              x:Name="BrowseItemsPage">
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Add Item" Clicked="AddItem_Clicked" />
+        <ToolbarItem Text="Settings" Clicked="Settings_Clicked" />
     </ContentPage.ToolbarItems>
     <ContentPage.Resources>
         <ResourceDictionary>

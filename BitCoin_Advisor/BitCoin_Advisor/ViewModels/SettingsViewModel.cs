@@ -4,11 +4,11 @@ using Xamarin.Forms;
 
 namespace BitCoin_Advisor.ViewModels
 {
-    public class AboutViewModel : BaseViewModel
+    public class SettingsViewModel : BaseViewModel
     {
-        public AboutViewModel()
+        public SettingsViewModel()
         {
-            Title = "About";
+            Title = "Settings";
 
             OpenWebCommand = new Command(() => Device.OpenUri(new Uri("https://xamarin.com/platform")));
         }

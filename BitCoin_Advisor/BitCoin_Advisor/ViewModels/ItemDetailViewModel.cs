@@ -16,7 +16,7 @@ namespace BitCoin_Advisor.ViewModels
 
         public ItemDetailViewModel(Item item = null)
         {
-            Title = "Browse";
+            Title = "Arbitrage";
             Items = new ObservableRangeCollection<Item>();
             var task = ExecuteLoadItemsCommand();
         }
