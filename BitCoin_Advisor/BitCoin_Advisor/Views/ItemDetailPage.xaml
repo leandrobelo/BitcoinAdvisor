@@ -4,9 +4,6 @@
              x:Class="BitCoin_Advisor.Views.ItemDetailPage"
               Title="{Binding Title}"
              x:Name="BrowseItemPage">
-    <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Add Item" Clicked="AddItem_Clicked" />
-    </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <StackLayout>
             <ListView x:Name="ItemsListView"

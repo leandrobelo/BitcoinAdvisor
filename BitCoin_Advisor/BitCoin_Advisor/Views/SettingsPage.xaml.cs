@@ -3,9 +3,9 @@ using Xamarin.Forms;
 
 namespace BitCoin_Advisor.Views
 {
-    public partial class AboutPage : ContentPage
+    public partial class SettingsPage : ContentPage
     {
-        public AboutPage()
+        public SettingsPage()
         {
             InitializeComponent();
         }
