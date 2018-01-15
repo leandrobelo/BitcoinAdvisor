@@ -18,11 +18,7 @@ namespace BitCoin_Advisor
 
         public static void SetMainPage()
         {
-            Current.MainPage = new NavigationPage(new ItemsPage())
-            {
-                BarBackgroundColor = Color.FromHex("#00548C"),
-                BackgroundColor = Color.FromHex("#3F3F46")
-            };
+            Current.MainPage = new NavigationPage(new ItemsPage());
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ModernHttpClient;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -48,7 +49,7 @@ namespace BitCoin_Advisor.Business
         {
             try
             {
-                var httpClient = new HttpClient(); // Error CS0246: The type or namespace name `HttpClient' could not be found. Are you missing an assembly reference? (CS0246)
+                var httpClient = new HttpClient(new NativeMessageHandler()); // Error CS0246: The type or namespace name `HttpClient' could not be found. Are you missing an assembly reference? (CS0246)
                 return await httpClient.GetByteArrayAsync(uri);
             }
             catch (Exception ex)

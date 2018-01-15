@@ -1,5 +1,6 @@
 ﻿using BitCoin_Advisor.Helpers;
 using BitCoin_Advisor.Models;
+using ModernHttpClient;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Concurrent;
@@ -28,8 +29,8 @@ namespace BitCoin_Advisor.Business
             {
                 if (sources.Count == 0)
                 {
-                    var exchangeMB = new Exchange() { Name = "MB", Image = @"BitCoin_Advisor.Images.mb.png", Fee = 0.99m, Currency = "BRL" };
-                    var exchangeBitCoinTrade = new Exchange() { Name = "BitCoinTrade", Image = @"BitCoin_Advisor.Images.bitcointrade.png", Fee = 0.99m, Currency = "BRL" };
+                    var exchangeMB = new Exchange() { Name = "Mercado Bitcoin", Image = @"BitCoin_Advisor.Images.mb.png", Fee = 0.99m, Currency = "BRL" };
+                    var exchangeBitCoinTrade = new Exchange() { Name = "BitCoin Trade", Image = @"BitCoin_Advisor.Images.bitcointrade.png", Fee = 0.99m, Currency = "BRL" };
                     var exchangeBistamp = new Exchange() { Name = "BitStamp", Image = @"BitCoin_Advisor.Images.bitstamp.png", Fee = 0.99m, Currency = "USD" };
                     var exchangeFoxBit = new Exchange() { Name = "FoxBit", Image = @"BitCoin_Advisor.Images.foxbit.png", Fee = 0.995m, Currency = "BRL" };
                     var exchangeCoinfloor = new Exchange() { Name = "CoinFloor", Image = @"BitCoin_Advisor.Images.coinfloor.png", Fee = 0.99m, Currency = "GBP" };
@@ -81,7 +82,7 @@ namespace BitCoin_Advisor.Business
         {
             try
             {
-                var client = new HttpClient();
+                var client = new HttpClient(new NativeMessageHandler());
                 client.DefaultRequestHeaders.Add("Accept", "application/json");
                 client.Timeout = TimeSpan.FromMinutes(300);
 

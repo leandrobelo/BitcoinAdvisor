@@ -55,8 +55,8 @@ namespace BitCoin_Advisor.Models
         {
             decimal currentBitcoin = (from.Price.Last * from.Exchange.Fee) / from.Price.Last;
             decimal netTo = (currentBitcoin * to.Price.Last * to.Exchange.Fee) / conversion;
-            
-            profit = (netTo - from.Price.Last) / from.Price.Last;
+
+            Profit = (netTo - from.Price.Last) / from.Price.Last;
         }
 
 

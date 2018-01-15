@@ -9,14 +9,17 @@
             <Color x:Key="DarkBackgroundColor">#A0A0A0</Color>
             <Color x:Key="MediumGrayTextColor">#0c0b0b</Color>
             <Color x:Key="LightTextColor">#999999</Color>
-
+            <Color x:Key="BackColour">#3F3F46</Color>
+            <Color x:Key="BarBackColour">#313138</Color>
+                        
             //Exclusive
             <Color x:Key="BackGroundArbitrageColor">#2D2D30</Color>
             <Color x:Key="LabelColor">#92caf4</Color>
             <Color x:Key="ValueColor">#D7BA7D</Color>
 
             <Style TargetType="NavigationPage">
-                <Setter Property="BarBackgroundColor" Value="{StaticResource Primary}" />
+                <Setter Property="BarBackgroundColor" Value="{StaticResource BarBackColour}" />
+                <Setter Property="BackgroundColor" Value="{StaticResource BackColour}" />
                 <Setter Property="BarTextColor" Value="White" />
             </Style>
         </ResourceDictionary>
