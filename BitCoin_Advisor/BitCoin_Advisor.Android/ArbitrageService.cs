@@ -30,7 +30,7 @@ namespace BitCoin_Advisor.Droid
                     }
                     finally
                     {
-                        Thread.Sleep(5000);
+                        Thread.Sleep(30000);
                     }
                 }
             });

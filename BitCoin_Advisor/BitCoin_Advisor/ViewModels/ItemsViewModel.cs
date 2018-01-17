@@ -32,8 +32,6 @@ namespace BitCoin_Advisor.ViewModels
         public ItemsViewModel()
         {
             Items = ArbitrageLoader.Arbitrages;
-
-            ExecuteLoadItemsCommand();
         }
 
 

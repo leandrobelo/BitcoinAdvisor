@@ -36,5 +36,12 @@ namespace BitCoin_Advisor
             get { return currency; }
             set { SetProperty(ref currency, value); }
         }
+
+        bool isEnabled;
+        public bool IsEnabled
+        {
+            get { return isEnabled; }
+            set { SetProperty(ref isEnabled, value); }
+        }
     }
 }
