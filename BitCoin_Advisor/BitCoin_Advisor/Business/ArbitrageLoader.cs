@@ -18,6 +18,12 @@ namespace BitCoin_Advisor.Business
         private static ObservableRangeCollection<Arbitrage> arbitrages = new ObservableRangeCollection<Arbitrage>();
         private static ConcurrentBag<ExchangeTicker> sources = new ConcurrentBag<ExchangeTicker>();
 
+        private static ObservableRangeCollection<Exchange> exchanges = new ObservableRangeCollection<Exchange>();
+        public static ObservableRangeCollection<Exchange> Exchanges
+        {
+            get { return exchanges; }
+        }
+
         public static ObservableRangeCollection<Arbitrage> Arbitrages
         {
             get { return arbitrages; }
@@ -29,11 +35,13 @@ namespace BitCoin_Advisor.Business
             {
                 if (sources.Count == 0)
                 {
-                    var exchangeMB = new Exchange() { Name = "Mercado Bitcoin", Image = @"BitCoin_Advisor.Images.mb.png", Fee = 0.99m, Currency = "BRL" };
-                    var exchangeBitCoinTrade = new Exchange() { Name = "BitCoin Trade", Image = @"BitCoin_Advisor.Images.bitcointrade.png", Fee = 0.99m, Currency = "BRL" };
-                    var exchangeBistamp = new Exchange() { Name = "BitStamp", Image = @"BitCoin_Advisor.Images.bitstamp.png", Fee = 0.99m, Currency = "USD" };
-                    var exchangeFoxBit = new Exchange() { Name = "FoxBit", Image = @"BitCoin_Advisor.Images.foxbit.png", Fee = 0.995m, Currency = "BRL" };
-                    var exchangeCoinfloor = new Exchange() { Name = "CoinFloor", Image = @"BitCoin_Advisor.Images.coinfloor.png", Fee = 0.99m, Currency = "GBP" };
+                    var exchangeMB = new Exchange() { Name = "Mercado Bitcoin", Image = @"BitCoin_Advisor.Images.mb.png", Fee = 0.99m, Currency = "BRL", IsEnabled = true };
+                    var exchangeBitCoinTrade = new Exchange() { Name = "BitCoin Trade", Image = @"BitCoin_Advisor.Images.bitcointrade.png", Fee = 0.99m, Currency = "BRL", IsEnabled = true };
+                    var exchangeBistamp = new Exchange() { Name = "BitStamp", Image = @"BitCoin_Advisor.Images.bitstamp.png", Fee = 0.99m, Currency = "USD", IsEnabled = true };
+                    var exchangeFoxBit = new Exchange() { Name = "FoxBit", Image = @"BitCoin_Advisor.Images.foxbit.png", Fee = 0.995m, Currency = "BRL", IsEnabled = true };
+                    var exchangeCoinfloor = new Exchange() { Name = "CoinFloor", Image = @"BitCoin_Advisor.Images.coinfloor.png", Fee = 0.99m, Currency = "GBP", IsEnabled = true };
+
+                    exchanges = new ObservableRangeCollection<Exchange>() { exchangeMB, exchangeBitCoinTrade, exchangeBistamp, exchangeFoxBit, exchangeCoinfloor };
 
                     var btc = new Symbol() { Name = "BTC" };
 
