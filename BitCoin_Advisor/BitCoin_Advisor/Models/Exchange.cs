@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Xamarin.Forms;
 
 namespace BitCoin_Advisor
 {
@@ -37,11 +38,27 @@ namespace BitCoin_Advisor
             set { SetProperty(ref currency, value); }
         }
 
-        bool isEnabled;
+        private bool? isEnabled;
         public bool IsEnabled
         {
-            get { return isEnabled; }
-            set { SetProperty(ref isEnabled, value); }
+            get
+            {
+                if (!isEnabled.HasValue)
+                {
+                    var propertyKey = String.Format("Exchange_Enabled_{0}", this.name);
+                    if (!Application.Current.Properties.ContainsKey(propertyKey) ||
+                        !Boolean.TryParse(Convert.ToString(Application.Current.Properties[propertyKey]), out bool propertyValue))
+                        propertyValue = true;
+
+                    isEnabled = propertyValue;
+                }
+                return isEnabled.Value;
+            }
+            set
+            {
+                SetProperty(ref isEnabled, value);
+                Application.Current.Properties[String.Format("Exchange_Enabled_{0}", this.name)] = value;
+            }
         }
     }
 }
